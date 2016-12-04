@@ -23,7 +23,7 @@ parser.add_argument("repos",
 
 # Token used for authentication
 # Due to rate limit in Github requests
-TOKEN = "42e9ebf734bdc37cc99fc933d8724f8eaf6b2290"
+TOKEN = "9a548d84262e88bddfd5a26ca8ffa6022b9fa5bb"
 g = Github(TOKEN)
 
 
@@ -58,6 +58,7 @@ class RepoInfo(Resource):
           last_commit = self.get_last_commit(repo)
 
         else:  # Private repo
+          # TODO here
           pass
 
         # Send back data to group 1, group 2
@@ -86,10 +87,14 @@ class RepoInfo(Resource):
         }
 
   def get_language(self, repo):
+    """
+    Get languages of specific repo
+    :param repo: repo object of
+    :return:
+    """
     languages = repo.get_languages()
     return languages.keys()
 
-  #
   def count_number_commit(self, owner, repo_name):
     """
     Get total commit by parsing html page of repo
@@ -114,7 +119,7 @@ class RepoInfo(Resource):
     branches = repo.get_protected_branch("master")
     return branches.commit.sha
 
-
+# Mapping requests here
 api.add_resource(HelloWorld, '/')
 api.add_resource(RepoInfo, '/api/v1/repo-info')
 
